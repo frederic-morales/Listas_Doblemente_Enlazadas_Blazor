@@ -11,8 +11,8 @@
             cola = null;
         }
 
-        // Método para agregar un elemento al final
-        public void Agregar(int dato)
+        // Método para agregar un nodo al final de la lista
+        public void AgregarAlFinal(int dato)
         {
             Nodo nuevo = new Nodo(dato);
             if (cabeza == null)
@@ -26,6 +26,29 @@
                 cola = nuevo;
             }
         }
+
+        // Método para agregar un nodo al inicio de la lista
+        public void AgregarAlInicio(int dato)
+        {
+            Nodo nuevo = new Nodo(dato);
+            if (cabeza == null)
+            {
+                cabeza = cola = nuevo;
+            }
+            else
+            {
+                nuevo.Siguiente = cabeza;
+                cabeza.Anterior = nuevo;
+                cabeza = nuevo;
+            }
+        }
+
+
+
+
+        /// ////////// ////////// ///
+        // METODOS DE ELIMINACION //
+        /// ////////// ////////// ///
 
         // Método para eliminar un elemento al inicio de la lista
         public void EliminarInicio()
@@ -108,15 +131,16 @@
             else cola = actual.Anterior;
         }
 
-        // Método para ordenar la lista (usando Bubble Sort)
         public void Ordenar()
         {
             if (cabeza == null) return;
+
             bool intercambio;
             do
             {
                 intercambio = false;
                 Nodo actual = cabeza;
+
                 while (actual.Siguiente != null)
                 {
                     if (actual.Dato > actual.Siguiente.Dato)
@@ -130,7 +154,6 @@
                 }
             } while (intercambio);
         }
-
         public List<int> ObtenerElementos()
         {
             List<int> elementos = new List<int>();

@@ -2,15 +2,19 @@
 <!-- Barra Lateral -->
 <div class="sidebar">
     <h2>Lista Doblemente Enlazada</h2>
-    <button @onclick="AgregarInicio"><i>🏠</i> Agregar al inicio</button>
-    <button @onclick="AgregarFinal"><i>➕</i> Agregar al Final</button>
     <button @onclick="EliminarInicio"><i>≡</i> Eliminar al Inicio</button>
     <button @onclick="EliminarFinal"><i>≡</i> Eliminar al Final</button>
+    <button @onclick="EliminarAntesDe"><i>⏪</i> Eliminar Antes de X</button>
+    <button @onclick="EliminarDespuesDe"><i>⏩</i> Eliminar Después de X</button>
+    <button @onclick="EliminarEnPosicion"><i>🎯</i> Eliminar en Posición</button>
+    @* <button @onclick="OrdenarLista"><i>🔀</i> Ordenar Lista</button> *@
 </div>
 
 <!-- Contenido Principal -->
 <div class="main-content">
     <input type="text" class="input-box" placeholder="Ingrese un número" @bind="nuevoDato">
+    <input type="text" class="input-box" placeholder="Elemento X" @bind="datoX">
+    <input type="text" class="input-box" placeholder="Posicion" @bind="posicion">
     <div class="button-container">
         <button class="btn btn-green" @onclick="AgregarFinal">Agregar Nodo Al final</button>
         <button class="btn btn-blue" @onclick="AgregarInicio">Agregar Nodo Al Inicio</button>
@@ -25,13 +29,15 @@
 
 @code {
     private string nuevoDato = "";
+    private string datoX = "";
+    private string posicion = "";   
     private ListasDoblementeEnlazadas lista = new ListasDoblementeEnlazadas();
 
     void AgregarInicio()
     {
         if (int.TryParse(nuevoDato, out int valor))
         {
-            lista.Agregar(valor);
+            lista.AgregarAlInicio(valor);
             nuevoDato = ""; // Limpiar input
         }
     }
@@ -40,7 +46,7 @@
     {
         if (int.TryParse(nuevoDato, out int valor))
         {
-            lista.Agregar(valor);
+            lista.AgregarAlFinal(valor);
             nuevoDato = "";
         }
     }
@@ -54,4 +60,36 @@
     {
         lista.EliminarFinal();
     }
+
+    void EliminarAntesDe()
+    {
+        if (int.TryParse(datoX, out int x))
+        {
+            lista.EliminarAntesDe(x);
+            datoX = "";
+        }
+    }
+
+    void EliminarDespuesDe()
+    {
+        if (int.TryParse(datoX, out int x))
+        {
+            lista.EliminarDespuesDe(x);
+            datoX = "";
+        }
+    }
+
+    void EliminarEnPosicion()
+    {
+        if (int.TryParse(posicion, out int pos))
+        {
+            lista.EliminarEnPosicion(pos);
+            posicion = "";
+        }
+    }
+
+    // void OrdenarLista()
+    // {
+    //     lista.Ordenar();
+    // }
 }
