@@ -7,6 +7,12 @@
     <button @onclick="EliminarAntesDe"><i>⏪</i> Eliminar Antes de X</button>
     <button @onclick="EliminarDespuesDe"><i>⏩</i> Eliminar Después de X</button>
     <button @onclick="EliminarEnPosicion"><i>🎯</i> Eliminar en Posición</button>
+
+    <button @onclick="AgregarAntesDe"><i>⬅️</i> Agregar Antes de X</button>
+    <button @onclick="AgregarDespuesDe"><i>➡️</i> Agregar Después de X</button>
+    <button @onclick="AgregarEnPosicion"><i>📍</i> Agregar en Posición</button>
+    <button @onclick="AgregarAntesDePosicion"><i>⬅️📍</i> Agregar Antes de Posición</button>
+    <button @onclick="AgregarDespuesDePosicion"><i>➡️📍</i> Agregar Después de Posición</button>
     @* <button @onclick="OrdenarLista"><i>🔀</i> Ordenar Lista</button> *@
 </div>
 
@@ -51,6 +57,57 @@
         }
     }
 
+    void AgregarAntesDe()
+    {
+        if (int.TryParse(nuevoDato, out int valor) && int.TryParse(datoX, out int x))
+        {
+            lista.AgregarAntesDe(x, valor);
+            nuevoDato = "";
+            datoX = "";
+        }
+    }
+
+    void AgregarDespuesDe()
+    {
+        if (int.TryParse(nuevoDato, out int valor) && int.TryParse(datoX, out int x))
+        {
+            lista.AgregarDespuesDe(x, valor);
+            nuevoDato = "";
+            datoX = "";
+        }
+    }
+
+    void AgregarEnPosicion()
+    {
+        if (int.TryParse(nuevoDato, out int valor) && int.TryParse(posicion, out int pos))
+        {
+            lista.AgregarEnPosicion(pos, valor);
+            nuevoDato = "";
+            posicion = "";
+        }
+    }
+
+    void AgregarAntesDePosicion()
+    {
+        if (int.TryParse(nuevoDato, out int valor) && int.TryParse(posicion, out int pos))
+        {
+            lista.AgregarAntesDePosicion(pos, valor);
+            nuevoDato = "";
+            posicion = "";
+        }
+    }
+
+    void AgregarDespuesDePosicion()
+    {
+        if (int.TryParse(nuevoDato, out int valor) && int.TryParse(posicion, out int pos))
+        {
+            lista.AgregarDespuesDePosicion(pos, valor);
+            nuevoDato = "";
+            posicion = "";
+        }
+    }
+
+    //METODOS DE ELIMINACION
     void EliminarInicio()
     {
         lista.EliminarInicio();

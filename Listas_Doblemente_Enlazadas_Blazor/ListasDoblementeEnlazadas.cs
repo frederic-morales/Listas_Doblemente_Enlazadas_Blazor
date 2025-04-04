@@ -44,6 +44,113 @@
         }
 
 
+        // Método para agregar un nodo antes de un dato X
+        public void AgregarAntesDe(int x, int dato)
+        {
+            Nodo actual = cabeza;
+            while (actual != null && actual.Dato != x)
+            {
+                actual = actual.Siguiente;
+            }
+
+            if (actual != null)
+            {
+                Nodo nuevo = new Nodo(dato);
+                nuevo.Siguiente = actual;
+                nuevo.Anterior = actual.Anterior;
+
+                if (actual.Anterior != null)
+                {
+                    actual.Anterior.Siguiente = nuevo;
+                }
+                else
+                {
+                    cabeza = nuevo;
+                }
+
+                actual.Anterior = nuevo;
+            }
+        }
+
+        // Método para agregar un nodo después de un dato X
+        public void AgregarDespuesDe(int x, int dato)
+        {
+            Nodo actual = cabeza;
+            while (actual != null && actual.Dato != x)
+            {
+                actual = actual.Siguiente;
+            }
+
+            if (actual != null)
+            {
+                Nodo nuevo = new Nodo(dato);
+                nuevo.Siguiente = actual.Siguiente;
+                nuevo.Anterior = actual;
+
+                if (actual.Siguiente != null)
+                {
+                    actual.Siguiente.Anterior = nuevo;
+                }
+                else
+                {
+                    cola = nuevo;
+                }
+
+                actual.Siguiente = nuevo;
+            }
+        }
+
+        // Método para agregar un nodo en una posición específica
+        public void AgregarEnPosicion(int posicion, int dato)
+        {
+            if (posicion < 0) return;
+
+            Nodo nuevo = new Nodo(dato);
+            if (posicion == 0)
+            {
+                AgregarAlInicio(dato);
+                return;
+            }
+
+            Nodo actual = cabeza;
+            for (int i = 0; actual != null && i < posicion - 1; i++)
+            {
+                actual = actual.Siguiente;
+            }
+
+            if (actual == null) return;
+
+            nuevo.Siguiente = actual.Siguiente;
+            nuevo.Anterior = actual;
+
+            if (actual.Siguiente != null)
+            {
+                actual.Siguiente.Anterior = nuevo;
+            }
+            else
+            {
+                cola = nuevo;
+            }
+
+            actual.Siguiente = nuevo;
+        }
+
+        // Método para agregar un nodo antes de una posición específica
+        public void AgregarAntesDePosicion(int posicion, int dato)
+        {
+            if (posicion <= 0)
+            {
+                AgregarAlInicio(dato);
+                return;
+            }
+            AgregarEnPosicion(posicion - 1, dato);
+        }
+
+        // Método para agregar un nodo después de una posición específica
+        public void AgregarDespuesDePosicion(int posicion, int dato)
+        {
+            AgregarEnPosicion(posicion + 1, dato);
+        }
 
 
         /// ////////// ////////// ///
