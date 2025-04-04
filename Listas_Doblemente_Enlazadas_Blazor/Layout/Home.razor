@@ -1,0 +1,57 @@
+﻿
+<!-- Barra Lateral -->
+<div class="sidebar">
+    <h2>Lista Doblemente Enlazada</h2>
+    <button @onclick="AgregarInicio"><i>🏠</i> Agregar al inicio</button>
+    <button @onclick="AgregarFinal"><i>➕</i> Agregar al Final</button>
+    <button @onclick="EliminarInicio"><i>≡</i> Eliminar al Inicio</button>
+    <button @onclick="EliminarFinal"><i>≡</i> Eliminar al Final</button>
+</div>
+
+<!-- Contenido Principal -->
+<div class="main-content">
+    <input type="text" class="input-box" placeholder="Ingrese un número" @bind="nuevoDato">
+    <div class="button-container">
+        <button class="btn btn-green" @onclick="AgregarFinal">Agregar Nodo Al final</button>
+        <button class="btn btn-blue" @onclick="AgregarInicio">Agregar Nodo Al Inicio</button>
+    </div>
+    <div class="content-area">
+        @foreach (var item in lista.ObtenerElementos())
+        {
+            <span class="nodo">@item</span>
+        }
+    </div>
+</div>
+
+@code {
+    private string nuevoDato = "";
+    private ListasDoblementeEnlazadas lista = new ListasDoblementeEnlazadas();
+
+    void AgregarInicio()
+    {
+        if (int.TryParse(nuevoDato, out int valor))
+        {
+            lista.Agregar(valor);
+            nuevoDato = ""; // Limpiar input
+        }
+    }
+
+    void AgregarFinal()
+    {
+        if (int.TryParse(nuevoDato, out int valor))
+        {
+            lista.Agregar(valor);
+            nuevoDato = "";
+        }
+    }
+
+    void EliminarInicio()
+    {
+        lista.EliminarInicio();
+    }
+
+    void EliminarFinal()
+    {
+        lista.EliminarFinal();
+    }
+}
